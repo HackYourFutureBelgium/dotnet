@@ -10,7 +10,28 @@
         // 5
         public static void PrintNumberInTraingle()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Please eneter a integer : ");
+
+            string userInput = Console.ReadLine();
+            
+            bool isInteger = int.TryParse(userInput, out int enteredNumber);
+            if ( ! isInteger || userInput == null)
+            {
+                Console.WriteLine("You didn't entered an integer");
+                return;
+            }
+
+            if (enteredNumber == 0)
+            {
+                Console.WriteLine("Please enter a number greater than zero");
+                return ;
+            }
+
+           for ( int i = enteredNumber;  i > 0 ; i--)
+           {
+                string str = string.Concat(Enumerable.Repeat(userInput, i));
+                Console.WriteLine(str);
+           }
         }
     }
 }

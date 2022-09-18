@@ -75,11 +75,6 @@ namespace HackYourFuture.DotnetMasterclass.FlowControl
             }
             Console.ReadLine();
 
-
-
-
-
-
             var index = 0;
             while (true)
             {
@@ -105,13 +100,6 @@ namespace HackYourFuture.DotnetMasterclass.FlowControl
                 Console.ReadLine();
             }
 
-
-
-
-
-
-
-
             for (int i = 0; i < 10; i++)
             {
                 Console.WriteLine(i);
@@ -132,14 +120,6 @@ namespace HackYourFuture.DotnetMasterclass.FlowControl
                 Console.WriteLine(planet);
                 Console.ReadLine();
             }
-
-
-
-
-
-
-
-
 
         }
     }

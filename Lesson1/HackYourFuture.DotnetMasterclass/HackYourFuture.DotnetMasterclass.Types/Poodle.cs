@@ -14,5 +14,11 @@ namespace HackYourFuture.DotnetMasterclass.Types
         }
 
         public FurColor FurColor { get; set; }
+
+
+
+
     }
 }
+
+

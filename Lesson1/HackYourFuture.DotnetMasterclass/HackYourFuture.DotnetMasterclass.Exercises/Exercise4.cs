@@ -10,7 +10,30 @@ namespace HackYourFuture.DotnetMasterclass.Exercises
         // Cappuccino => !!! Found consecutive letters 'p' and 'c'
         public static void CheckIfWordHasTwoSimilarConsecutiveLetters()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Please enter a string : ");
+
+            string userInput = Console.ReadLine();
+
+            if( userInput == "" || userInput == null)
+            {
+                Console.WriteLine("You didn't enter a string");
+                return;
+            }
+
+            bool hasNoconsecutiveLetters = true;
+            for ( int i = 0; i < userInput.Length - 1; i++)
+            {
+                if ( userInput[i] == userInput[i + 1] )
+                {
+                    hasNoconsecutiveLetters = false;
+                    Console.WriteLine($" Found consecutive letter '{userInput[i]}'");
+                }               
+            }
+
+            if ( hasNoconsecutiveLetters )
+            {
+                Console.WriteLine("No consecutive letters found");
+            }
         }
     }
 }

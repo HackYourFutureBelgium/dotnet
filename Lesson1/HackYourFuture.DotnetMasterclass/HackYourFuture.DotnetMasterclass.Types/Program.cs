@@ -7,7 +7,10 @@ string text = "hello"; // A sequence of characters
 
 
 // Whole numbers
-byte byteValue = 250; // Integer between 0 and 255
+byte byteValue = 240; // Integer between 0 and 255
+
+//Console.WriteLine(byte.MinValue);
+//Console.WriteLine(byte.MaxValue);
 
 int number = 14; // Integer between −2147483648 and 2147483647
 
@@ -15,11 +18,11 @@ long longerNumber = 9223372036854775807;  // Integer between -922337203685477580
 
 
 // Floating point numbers A.K.A. Decimal Number
-float shortDecimal = 12123.4f; // (Single) 7 digits (32 bit)
+float shortDecimal = 12123.4F; // (Single) 7 digits (32 bit)
 
-double defaultDecimal = 123123123123.564516; // 15-16 digits (64 bit)
+double defaultDecimal = 123123123123.564516D; // 15-16 digits (64 bit)
 
-decimal longDecimal = 8156189123196561.66466464561321351m; // 28-29 significant digits (128 bit)
+decimal longDecimal = 8156189123196561.66466464561321351M; // 28-29 significant digits (128 bit)
 
 
 // Boolean variables
@@ -33,25 +36,17 @@ var newNumber = 17;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Arrays
 string[] stringArray = new string[2];
 stringArray[0] = "firstValue";
 stringArray[1] = "secondValue";
 //stringArray[2] = "thirdValue"; // Not allowed since the predefined size is 2
+
+//foreach( string value in stringArray)
+//{
+//    Console.WriteLine(value);
+//}
+
 
 string[] stringArray2 = new string[] { "firstString", "secondString", "3rd", "4th", "6th" };
 
@@ -78,6 +73,18 @@ stringList.Add("2nd");
 stringList.Add("3rd");
 stringList.Add("4th");
 
+
+ 
+//foreach(string value in stringlist)
+//{
+//    Console.WriteLine(value);
+//}
+
+
+// stringList.ForEach(value => Console.WriteLine(value));
+
+
+// List of lists
 var recursiveStringList = new List<List<string>>();
 recursiveStringList.Add(
     new List<string>
@@ -95,7 +102,9 @@ recursiveStringList.Add(
 
 
 
+var dict = new Dictionary<string, string>();
 
+dict.Add("keyOne", "test");
 
 
 
@@ -168,3 +177,8 @@ if (location.Longitude != location2.Longitude)
 {
     Console.WriteLine("Location is a value type");
 }
+
+
+
+var dict = new Dictionary<string, string>();
+dict.Add("firstKey", "test");
