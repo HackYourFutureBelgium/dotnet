@@ -1,12 +1,7 @@
 ﻿var time = new JupiterTime(1, 21);
 var timeIn20Minutes = time.AddMinutes(20);
 
-PrintTime(timeIn20Minutes);
-
-void PrintTime(JupiterTime time)
-{
-    Console.WriteLine($"{time.Hours}:{time.Minutes:D2}");
-}
+Console.WriteLine(timeIn20Minutes);
 
 class JupiterTime
 {
@@ -48,4 +43,9 @@ class JupiterTime
     public int Hours { get; }
 
     public int Minutes { get; }
+
+    public override string ToString()
+    {
+        return $"{Hours}:{Minutes:D2}";
+    }
 }
