@@ -1,6 +1,7 @@
-﻿var time = new JupiterTime(14, 88);
+﻿var time = new JupiterTime(2, 20);
+var timeIn1Hour = time.AddHours(-12);
 
-PrintTime(time);
+PrintTime(timeIn1Hour);
 
 void PrintTime(JupiterTime time)
 {
@@ -9,16 +10,36 @@ void PrintTime(JupiterTime time)
 
 class JupiterTime
 {
+    private const int HoursPerDay = 10;
+    private const int MinutesPerHour = 60;
+
     public JupiterTime(int hours, int minutes)
     {
-        var totalMinutes = hours * 60 + minutes;
+        var totalMinutes = hours * MinutesPerHour + minutes;
 
-        Minutes = totalMinutes % 60;
+        if (totalMinutes < 0)
+        {
+            // Add one, because we want to round up
+            // Integer division in C# rounds down
+            var minutesBelowZero = 0 - totalMinutes;
+            var totalDaysBelowZero = 1 + minutesBelowZero / (HoursPerDay * MinutesPerHour);
 
-        var totalHours = (totalMinutes - Minutes) / 60;
+            // Add that many days, so we have a positive number
+            totalMinutes += totalDaysBelowZero * HoursPerDay * MinutesPerHour;
+        }
+
+        Minutes = totalMinutes % MinutesPerHour;
+
+        var totalHours = (totalMinutes - Minutes) / MinutesPerHour;
         
-        Hours = totalHours % 10;
+        Hours = totalHours % HoursPerDay;
     }
+
+    public JupiterTime AddHours(int hours)
+    {
+        return new JupiterTime(Hours + hours, Minutes);
+    }
+
     public int Hours { get; }
 
     public int Minutes { get; }
