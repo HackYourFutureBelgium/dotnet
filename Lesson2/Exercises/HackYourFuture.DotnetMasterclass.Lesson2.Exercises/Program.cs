@@ -1,9 +1,12 @@
-﻿var signaler = new Signaler();
-signaler.AddTime(new JupiterTime(1, 20));
-signaler.AddTime(new JupiterTime(2, 20));
-signaler.AddTime(new JupiterTime(3, 20));
+﻿using System.Reflection.Metadata.Ecma335;
 
-signaler.Inform();
+var signaler = new Signaler();
+signaler.AddTime(new JupiterTime(2, 00));
+signaler.AddTime(new JupiterTime(4, 00));
+signaler.AddTime(new JupiterTime(6, 00));
+
+// We woke up at 4:21
+signaler.Check(new JupiterTime(4, 21));
 
 class JupiterTime
 {
@@ -49,9 +52,16 @@ class JupiterTime
         return new JupiterTime(Hours, Minutes + minutes);
     }
 
+    public bool IsBefore(JupiterTime other)
+    {
+        return TotalMinutes < other.TotalMinutes;
+    }
+
     public int Hours { get; }
 
     public int Minutes { get; }
+
+    public int TotalMinutes => Hours * MinutesPerHour + Minutes;
 
     public override string ToString()
     {
@@ -76,9 +86,20 @@ class Signaler
             return;
         }
 
-        foreach (var jupiterTime in _signalTimes)
+        foreach (var signalTime in _signalTimes)
         {
-            Console.WriteLine(jupiterTime);
+            Console.WriteLine(signalTime);
+        }
+    }
+
+    public void Check(JupiterTime time)
+    {
+        foreach (var signalTime in _signalTimes)
+        {
+            if (signalTime.IsBefore(time))
+            {
+                Console.WriteLine(signalTime);
+            }
         }
     }
 }
