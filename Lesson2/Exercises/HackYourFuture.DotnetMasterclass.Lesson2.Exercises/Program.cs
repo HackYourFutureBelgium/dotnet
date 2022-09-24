@@ -1,7 +1,7 @@
-﻿var time = new JupiterTime(2, 20);
-var timeIn1Hour = time.AddHours(-12);
+﻿var time = new JupiterTime(1, 21);
+var timeIn20Minutes = time.AddMinutes(20);
 
-PrintTime(timeIn1Hour);
+PrintTime(timeIn20Minutes);
 
 void PrintTime(JupiterTime time)
 {
@@ -38,6 +38,11 @@ class JupiterTime
     public JupiterTime AddHours(int hours)
     {
         return new JupiterTime(Hours + hours, Minutes);
+    }
+
+    public JupiterTime AddMinutes(int minutes)
+    {
+        return new JupiterTime(Hours, Minutes + minutes);
     }
 
     public int Hours { get; }
