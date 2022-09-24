@@ -69,6 +69,67 @@ class JupiterTime
     }
 }
 
+class TitanTime
+{
+    private const int HoursPerDay = 900;
+    private const int MinutesPerHour = 60;
+
+    public TitanTime(int hours, int minutes)
+    {
+        var totalMinutes = hours * MinutesPerHour + minutes;
+
+        totalMinutes = MakeSureTimeIsPositive(totalMinutes);
+
+        Minutes = totalMinutes % MinutesPerHour;
+
+        var totalHours = (totalMinutes - Minutes) / MinutesPerHour;
+
+        Hours = totalHours % HoursPerDay;
+    }
+
+    private static int MakeSureTimeIsPositive(int totalMinutes)
+    {
+        if (totalMinutes < 0)
+        {
+            // Add one, because we want to round up
+            // Integer division in C# rounds down
+            var minutesBelowZero = 0 - totalMinutes;
+            var totalDaysBelowZero = 1 + minutesBelowZero / (HoursPerDay * MinutesPerHour);
+
+            // Add that many days, so we have a positive number
+            totalMinutes += totalDaysBelowZero * HoursPerDay * MinutesPerHour;
+        }
+
+        return totalMinutes;
+    }
+
+    public TitanTime AddHours(int hours)
+    {
+        return new TitanTime(Hours + hours, Minutes);
+    }
+
+    public TitanTime AddMinutes(int minutes)
+    {
+        return new TitanTime(Hours, Minutes + minutes);
+    }
+
+    public bool IsBefore(TitanTime other)
+    {
+        return TotalMinutes < other.TotalMinutes;
+    }
+
+    public int Hours { get; }
+
+    public int Minutes { get; }
+
+    public int TotalMinutes => Hours * MinutesPerHour + Minutes;
+
+    public override string ToString()
+    {
+        return $"{Hours:D3}:{Minutes:D2}";
+    }
+}
+
 class Signaler
 {
     private readonly List<JupiterTime> _signalTimes = new();
