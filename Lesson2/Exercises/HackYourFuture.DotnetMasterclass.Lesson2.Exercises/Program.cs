@@ -1,6 +1,4 @@
-﻿var time = new JupiterTime();
-time.Hours = 8;
-time.Minutes = 40;
+﻿var time = new JupiterTime(14, 88);
 
 PrintTime(time);
 
@@ -11,6 +9,17 @@ void PrintTime(JupiterTime time)
 
 class JupiterTime
 {
-    public int Hours { get; set; }
-    public int Minutes { get; set; }
+    public JupiterTime(int hours, int minutes)
+    {
+        var totalMinutes = hours * 60 + minutes;
+
+        Minutes = totalMinutes % 60;
+
+        var totalHours = (totalMinutes - Minutes) / 60;
+        
+        Hours = totalHours % 10;
+    }
+    public int Hours { get; }
+
+    public int Minutes { get; }
 }
