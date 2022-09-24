@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-var signaler = new Signaler();
+﻿var signaler = new Signaler();
 signaler.AddTime(new JupiterTime(2, 00));
 signaler.AddTime(new JupiterTime(4, 00));
 signaler.AddTime(new JupiterTime(6, 00));
@@ -8,74 +6,35 @@ signaler.AddTime(new JupiterTime(6, 00));
 // We woke up at 4:21
 signaler.Check(new JupiterTime(4, 21));
 
-class JupiterTime
+public class JupiterTime : AlienTime
 {
-    private const int HoursPerDay = 10;
-    private const int MinutesPerHour = 60;
-
     public JupiterTime(int hours, int minutes)
-    {
-        var totalMinutes = hours * MinutesPerHour + minutes;
-
-        totalMinutes = MakeSureTimeIsPositive(totalMinutes);
-
-        Minutes = totalMinutes % MinutesPerHour;
-
-        var totalHours = (totalMinutes - Minutes) / MinutesPerHour;
-        
-        Hours = totalHours % HoursPerDay;
-    }
-
-    private static int MakeSureTimeIsPositive(int totalMinutes)
-    {
-        if (totalMinutes < 0)
-        {
-            // Add one, because we want to round up
-            // Integer division in C# rounds down
-            var minutesBelowZero = 0 - totalMinutes;
-            var totalDaysBelowZero = 1 + minutesBelowZero / (HoursPerDay * MinutesPerHour);
-
-            // Add that many days, so we have a positive number
-            totalMinutes += totalDaysBelowZero * HoursPerDay * MinutesPerHour;
-        }
-
-        return totalMinutes;
-    }
-
-    public JupiterTime AddHours(int hours)
-    {
-        return new JupiterTime(Hours + hours, Minutes);
-    }
-
-    public JupiterTime AddMinutes(int minutes)
-    {
-        return new JupiterTime(Hours, Minutes + minutes);
-    }
-
-    public bool IsBefore(JupiterTime other)
-    {
-        return TotalMinutes < other.TotalMinutes;
-    }
-
-    public int Hours { get; }
-
-    public int Minutes { get; }
-
-    public int TotalMinutes => Hours * MinutesPerHour + Minutes;
-
-    public override string ToString()
-    {
-        return $"{Hours}:{Minutes:D2}";
-    }
+        : base(hours, minutes, 10)
+    { }
 }
 
-class TitanTime
+public class TitanTime : AlienTime
 {
-    private const int HoursPerDay = 900;
+    public TitanTime(int hours, int minutes)
+        : base(hours, minutes, 900)
+    { }
+}
+
+public class GanymedeTime : AlienTime
+{
+    public GanymedeTime(int hours, int minutes)
+        : base(hours, minutes, 171)
+    { }
+}
+public abstract class AlienTime
+{
+    private readonly int _hoursPerDay;
     private const int MinutesPerHour = 60;
 
-    public TitanTime(int hours, int minutes)
+    protected AlienTime(int hours, int minutes, int hoursPerDay)
     {
+        _hoursPerDay = hoursPerDay;
+
         var totalMinutes = hours * MinutesPerHour + minutes;
 
         totalMinutes = MakeSureTimeIsPositive(totalMinutes);
@@ -84,36 +43,26 @@ class TitanTime
 
         var totalHours = (totalMinutes - Minutes) / MinutesPerHour;
 
-        Hours = totalHours % HoursPerDay;
+        Hours = totalHours % _hoursPerDay;
     }
 
-    private static int MakeSureTimeIsPositive(int totalMinutes)
+    private int MakeSureTimeIsPositive(int totalMinutes)
     {
         if (totalMinutes < 0)
         {
             // Add one, because we want to round up
             // Integer division in C# rounds down
             var minutesBelowZero = 0 - totalMinutes;
-            var totalDaysBelowZero = 1 + minutesBelowZero / (HoursPerDay * MinutesPerHour);
+            var totalDaysBelowZero = 1 + minutesBelowZero / (_hoursPerDay * MinutesPerHour);
 
             // Add that many days, so we have a positive number
-            totalMinutes += totalDaysBelowZero * HoursPerDay * MinutesPerHour;
+            totalMinutes += totalDaysBelowZero * _hoursPerDay * MinutesPerHour;
         }
 
         return totalMinutes;
     }
 
-    public TitanTime AddHours(int hours)
-    {
-        return new TitanTime(Hours + hours, Minutes);
-    }
-
-    public TitanTime AddMinutes(int minutes)
-    {
-        return new TitanTime(Hours, Minutes + minutes);
-    }
-
-    public bool IsBefore(TitanTime other)
+    public bool IsBefore(AlienTime other)
     {
         return TotalMinutes < other.TotalMinutes;
     }
@@ -132,9 +81,9 @@ class TitanTime
 
 class Signaler
 {
-    private readonly List<JupiterTime> _signalTimes = new();
+    private readonly List<AlienTime> _signalTimes = new();
 
-    public void AddTime(JupiterTime time)
+    public void AddTime(AlienTime time)
     {
         _signalTimes.Add(time);
     }
@@ -153,7 +102,7 @@ class Signaler
         }
     }
 
-    public void Check(JupiterTime time)
+    public void Check(AlienTime time)
     {
         foreach (var signalTime in _signalTimes)
         {
