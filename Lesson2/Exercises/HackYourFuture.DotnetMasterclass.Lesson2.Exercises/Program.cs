@@ -1,7 +1,9 @@
-﻿var time = new JupiterTime(1, 21);
-var timeIn20Minutes = time.AddMinutes(20);
+﻿var signaler = new Signaler();
+signaler.AddTime(new JupiterTime(1, 20));
+signaler.AddTime(new JupiterTime(2, 20));
+signaler.AddTime(new JupiterTime(3, 20));
 
-Console.WriteLine(timeIn20Minutes);
+signaler.Inform();
 
 class JupiterTime
 {
@@ -12,6 +14,17 @@ class JupiterTime
     {
         var totalMinutes = hours * MinutesPerHour + minutes;
 
+        totalMinutes = MakeSureTimeIsPositive(totalMinutes);
+
+        Minutes = totalMinutes % MinutesPerHour;
+
+        var totalHours = (totalMinutes - Minutes) / MinutesPerHour;
+        
+        Hours = totalHours % HoursPerDay;
+    }
+
+    private static int MakeSureTimeIsPositive(int totalMinutes)
+    {
         if (totalMinutes < 0)
         {
             // Add one, because we want to round up
@@ -23,11 +36,7 @@ class JupiterTime
             totalMinutes += totalDaysBelowZero * HoursPerDay * MinutesPerHour;
         }
 
-        Minutes = totalMinutes % MinutesPerHour;
-
-        var totalHours = (totalMinutes - Minutes) / MinutesPerHour;
-        
-        Hours = totalHours % HoursPerDay;
+        return totalMinutes;
     }
 
     public JupiterTime AddHours(int hours)
@@ -47,5 +56,29 @@ class JupiterTime
     public override string ToString()
     {
         return $"{Hours}:{Minutes:D2}";
+    }
+}
+
+class Signaler
+{
+    private readonly List<JupiterTime> _signalTimes = new();
+
+    public void AddTime(JupiterTime time)
+    {
+        _signalTimes.Add(time);
+    }
+
+    public void Inform()
+    {
+        if (_signalTimes.Count == 0)
+        {
+            Console.WriteLine("No timers added yet.");
+            return;
+        }
+
+        foreach (var jupiterTime in _signalTimes)
+        {
+            Console.WriteLine(jupiterTime);
+        }
     }
 }
