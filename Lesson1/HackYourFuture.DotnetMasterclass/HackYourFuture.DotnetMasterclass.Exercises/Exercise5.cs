@@ -1,4 +1,6 @@
-﻿namespace HackYourFuture.DotnetMasterclass.Exercises
+﻿using System;
+
+namespace HackYourFuture.DotnetMasterclass.Exercises
 {
     public class Exercise5
     {
@@ -10,7 +12,51 @@
         // 5
         public static void PrintNumberInTraingle()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("this program turns a number into a triangle");
+            int number = 0;
+            while (number == 0 || number <0)
+            {
+                Console.WriteLine("Enter a number different from 0: ");
+                var numberText = Console.ReadLine();
+
+                int.TryParse(numberText, out number);
+            }
+
+            Console.WriteLine($"your number is {number}");
+            Console.WriteLine("drawing triangle...");
+
+            for (int i = number; i>0; i--)
+            {
+                for (int c = i; c>0; c--)
+                {
+                    Console.Write(number);
+                }
+                Console.WriteLine();
+            }
+
+            Console.ReadLine();
+
+
+            /*
+            var numberText = Console.ReadLine();
+
+            int number;
+
+            while (int.Parse(numberText)==null || int.Parse(numberText) < 0)
+                {
+                    Console.WriteLine("please enter a valid positive number");
+                    numberText = Console.ReadLine();
+                }
+
+           
+            while(!int.TryParse(numberText, out number))
+            {
+                Console.WriteLine("please enter a valid positive number");
+                numberText = Console.ReadLine();
+            }
+            */
+
+            //throw new NotImplementedException();
         }
     }
 }

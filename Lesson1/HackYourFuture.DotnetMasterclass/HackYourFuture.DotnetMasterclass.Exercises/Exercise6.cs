@@ -8,7 +8,28 @@
         // Area => πr²
         public static void CaclulateThePerimeterOfACircleBasedOnTheRadius()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("this program calculates the perimiter and are of a circle according to its radius");
+            int radius = 0;
+
+            while(radius <= 0)
+            {
+                Console.WriteLine("please enter a valid radius for your circle in cm");
+                var radiusText = Console.ReadLine();
+                int.TryParse(radiusText, out radius);
+            }
+
+            Console.WriteLine($"your circle's radius is {radius}cm");
+            Console.WriteLine("calculating circumference...");
+            double circumference = radius * 2 * Math.PI;
+
+            Console.WriteLine($"your circle's circumference is {circumference}cm");
+            Console.WriteLine("calculating area...");
+
+            double area = Math.Pow(radius, 2) * Math.PI;
+            Console.WriteLine($"your circle's circumference is {area}cm²");
+
+            Console.ReadLine();
+            //throw new NotImplementedException();
         }
     }
 }

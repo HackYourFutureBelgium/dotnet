@@ -4,14 +4,12 @@
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine(await GetPokemonDitto());
-            Console.ReadLine();
+            Console.WriteLine("please tell us what pokemon you want");
+            var pokemonToFetch = Console.ReadLine();
 
-
-            // Wait for multiple tasks
-            var result = await Task.WhenAll(GetPokemonDitto(), GetPokemonCharmander());
-            Console.WriteLine(result[0]);
-            Console.WriteLine(result[1]);
+            var exercise1 = new Exercise1();
+            var result = await exercise1.GetYourPokemon(pokemonToFetch);
+            Console.WriteLine(result);
             Console.ReadLine();
         }
 

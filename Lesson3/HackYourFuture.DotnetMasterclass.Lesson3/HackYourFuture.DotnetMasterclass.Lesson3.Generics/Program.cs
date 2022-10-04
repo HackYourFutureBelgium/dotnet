@@ -8,6 +8,8 @@ namespace HackYourFuture.DotnetMasterclass.Lesson3.Generics
     {
         static void Main(string[] args)
         {
+
+            /*
             // Knowing the data structure type at run time is faster:
 
             //generic list
@@ -26,7 +28,7 @@ namespace HackYourFuture.DotnetMasterclass.Lesson3.Generics
             s2.Stop();
             Console.WriteLine($"Non-Generic Sort: {ListNonGeneric}  \n Time taken: {s2.Elapsed.TotalMilliseconds}ms");
             Console.ReadLine();
-
+            */
 
 
 
@@ -40,9 +42,25 @@ namespace HackYourFuture.DotnetMasterclass.Lesson3.Generics
 
 
             // Call Generic Method
-            GenericMethodExecutor.Execute();
+            //GenericMethodExecutor.Execute();
+            /*
+             exercise 1 works 
+             
+            var check = new Exercise1<string, string>();
+            check.Print("bob", "henry");
             Console.ReadLine();
+            */
 
+            var carList = new List<Car> { };
+
+            carList.Add(new Jaguar("red", "234-567-89"));
+            carList.Add(new Lamborghini(6, "987-537-11"));
+
+            var test = new CarList<List<Car>>(carList);
+
+
+            test.PrintOut(carList);
+            Console.ReadLine();
 
         }
     }
