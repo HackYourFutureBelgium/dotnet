@@ -1,4 +1,6 @@
-﻿namespace SecureApiStartersProject.DataLayer
+﻿using SecureApiStartersProject.Models;
+
+namespace SecureApiStartersProject.DataLayer
 {
     public interface ITodoRepository
     {
