@@ -16,6 +16,7 @@ namespace SecureApiStartersProject.Controllers
         }
 
         [HttpGet]
+        [Authorize("todo:read")]
         public async Task<IActionResult> GetTodoItem(string id)
         {
             var todoItem = await _todoRepository.Get(id);
@@ -23,6 +24,7 @@ namespace SecureApiStartersProject.Controllers
         }
 
         [HttpPost]
+        [Authorize("todo:write")]
         public async Task<IActionResult> PostTodoItem(string description)
         {
             var id = await _todoRepository.CreateAsync(description);
@@ -30,6 +32,7 @@ namespace SecureApiStartersProject.Controllers
         }
 
         [HttpDelete]
+        [Authorize("todo:delete")]
         public async Task<IActionResult> DeleteTodoItem(string id)
         {
             await _todoRepository.Delete(id);
@@ -37,6 +40,7 @@ namespace SecureApiStartersProject.Controllers
         }
 
         [HttpPut]
+        [Authorize("todo:write")]
         public async Task<IActionResult> UpdateTodoItem(string id, bool completed)
         {
             await _todoRepository.Update(id, completed);
