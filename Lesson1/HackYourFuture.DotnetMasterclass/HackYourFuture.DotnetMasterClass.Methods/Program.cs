@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args)  // static means there is one instance evernnn of this class
         {
             Console.WriteLine("Hello, World!");
 

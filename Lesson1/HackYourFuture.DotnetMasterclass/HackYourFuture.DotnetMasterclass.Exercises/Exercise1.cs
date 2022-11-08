@@ -11,7 +11,20 @@ namespace HackYourFuture.DotnetMasterclass.Exercises
         // Write a method that asks the user to input 2 numbers and to return the biggest one
         public static int PrintTheLargestNumber()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Input two numbers please:");
+            var firstNum = int.Parse(Console.ReadLine());
+            var secondNum = int.Parse(Console.ReadLine());
+
+            if (firstNum > secondNum)
+            {
+                Console.WriteLine(firstNum);
+                return firstNum;
+            }
+            else
+            {
+                Console.WriteLine(secondNum);
+                return secondNum;
+            }
         }
     }
 }

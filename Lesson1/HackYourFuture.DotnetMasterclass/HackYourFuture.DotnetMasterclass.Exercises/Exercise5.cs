@@ -10,7 +10,25 @@
         // 5
         public static void PrintNumberInTraingle()
         {
-            throw new NotImplementedException();
+            int number = 0;
+            while (number == 0)
+            {
+                Console.WriteLine("Enter a number different from 0: ");
+                var numberText = Console.ReadLine();
+
+                int.TryParse(numberText, out number);
+            }
+
+            for (int i = 0; i < number; i++)
+            {
+                for (int j = 0; j < number - i; j++)
+                {
+                    Console.Write(number);
+                }
+                Console.WriteLine();
+            }
+
+            Console.ReadLine();
         }
     }
 }

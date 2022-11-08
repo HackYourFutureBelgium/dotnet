@@ -3,13 +3,16 @@
 // Text
 char character = 'b'; // Single Unicode character, stored as an integer between 0 and 65535
 
-string text = "hello"; // A sequence of characters
+string text = "hello multiple +%&1 characters allowed"; // A sequence of characters
 
 
 // Whole numbers
-byte byteValue = 250; // Integer between 0 and 255
+byte byteValue = 255; // Integer between 0 and 255
+
+Console.WriteLine(byteValue);
 
 int number = 14; // Integer between −2147483648 and 2147483647
+
 
 long longerNumber = 9223372036854775807;  // Integer between -9223372036854775808 and 9223372036854775807
 
@@ -93,7 +96,9 @@ recursiveStringList.Add(
         "thirdStringInSecondList"
     });
 
-
+var dict = new Dictionary<string, string>();
+dict.Add("name", "Kuki");
+dict.Add("hairCol", "brown");
 
 
 

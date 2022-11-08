@@ -6,7 +6,39 @@
         // 12345 => 15 => 6
         internal static void AddDigitsForAGivenNumber()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Please enter an integer number: ");
+            //var num = Console.ReadLine();
+
+            //var length = num.Length;
+            //var sum = 0;
+
+            //for (var i = 0; i < length; i++)
+            //{
+            //    sum += num[i];
+            //    //Console.WriteLine(num[i]);
+            //}
+
+            //Console.WriteLine(sum.GetType());
+            //Console.WriteLine(sum);
+
+            var num = int.Parse(Console.ReadLine());
+            var sum = num;
+            var length = num.ToString().Length;
+            //Console.WriteLine("length: " + length);
+
+            while (sum > 9)
+            {
+                num = sum;
+                length = num.ToString().Length;
+                sum = 0;
+                for (int i = 0; i < length; i++)
+                {
+                    sum += num % 10;
+                    num = num / 10;
+                    Console.WriteLine("num after " + i + ". iteration: " + num);
+                }
+                Console.WriteLine(sum);
+            }
         }
     }
 }

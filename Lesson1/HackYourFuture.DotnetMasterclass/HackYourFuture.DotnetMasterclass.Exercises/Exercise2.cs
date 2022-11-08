@@ -8,7 +8,10 @@ namespace HackYourFuture.DotnetMasterclass.Exercises
 
         public static void ConvertCelsiusToFahrenheit()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Please input Celcius:");
+            var celcius = int.Parse(Console.ReadLine());
+            var fahren = celcius * 1.8 + 32;
+            Console.WriteLine("Fahreneit is: " + fahren + "F");
         }
     }
 }

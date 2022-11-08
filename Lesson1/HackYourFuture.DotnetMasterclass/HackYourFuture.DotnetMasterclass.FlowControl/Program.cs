@@ -66,7 +66,7 @@ namespace HackYourFuture.DotnetMasterclass.FlowControl
                     break;
 
                 case DayOfWeek.Sunday:
-                    Console.WriteLine("It's Tuesday today");
+                    Console.WriteLine("It's Sunday today");
                     break;
 
                 default:

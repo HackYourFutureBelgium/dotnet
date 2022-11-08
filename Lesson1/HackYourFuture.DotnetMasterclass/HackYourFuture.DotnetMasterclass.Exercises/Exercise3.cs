@@ -6,7 +6,12 @@
         // E.g.: programming => grogramminp
         public static void ReverseFirstAndLastLettersInWord()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Enter a string please");
+            var str = Console.ReadLine();
+            var first = str[0];
+            var last = str[str.Length-1];
+            string newstr = last + str.Substring(1, str.Length - 2) + first;
+            Console.WriteLine(newstr);
         }
     }
 }
