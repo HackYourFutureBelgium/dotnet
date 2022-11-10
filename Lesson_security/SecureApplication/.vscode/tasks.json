@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Run Secure Application",
+            "dependsOn": [
+                "Run Secure Api",
+                "Run React App"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "Run Secure Api",
+            "command": "dotnet",
+            "args": [
+                "run"
+            ],
+            "options": {
+                "cwd": "SecureApiExample/SecureApiExample"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "npm",
+            "label": "Run React App",
+            "script": "start",
+            "path": "secure-app",
+            "problemMatcher": []
+        },
+    ]
+}
